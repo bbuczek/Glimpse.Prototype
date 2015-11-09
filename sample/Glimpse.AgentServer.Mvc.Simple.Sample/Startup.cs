@@ -2,7 +2,7 @@
 using Glimpse.Agent;
 using Glimpse.Server;
 using Microsoft.AspNet.Builder;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.AgentServer.AspNet.Mvc.Simple.Sample
 {

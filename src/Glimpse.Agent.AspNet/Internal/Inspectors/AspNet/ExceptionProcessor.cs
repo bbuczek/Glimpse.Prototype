@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.FileProviders;
-using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Dnx.Runtime;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
 {

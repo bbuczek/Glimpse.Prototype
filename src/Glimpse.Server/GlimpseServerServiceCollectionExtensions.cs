@@ -1,6 +1,6 @@
 ﻿using System;
 using Glimpse.Server;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse
 {

@@ -1,13 +1,13 @@
 ﻿using System;
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.DiagnosticAdapter;
+using Microsoft.Framework.TelemetryAdapter;
 
 namespace Glimpse.Agent.Internal.Inspectors.Mvc
 {
     public partial class WebDiagnosticsInspector
     {
-        [DiagnosticName("Microsoft.AspNet.Hosting.BeginRequest")]
+        [TelemetryName("Microsoft.AspNet.Hosting.BeginRequest")]
         public void OnBeginRequest(HttpContext httpContext)
         {
             // TODO: Not sure if this is where this should live but it's the earlist hook point we have
@@ -34,7 +34,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Hosting.EndRequest")]
+        [TelemetryName("Microsoft.AspNet.Hosting.EndRequest")]
         public void OnEndRequest(HttpContext httpContext)
         {
             var message = new EndRequestMessage();
@@ -43,7 +43,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
         
-        [DiagnosticName("Microsoft.AspNet.Hosting.UnhandledException")]
+        [TelemetryName("Microsoft.AspNet.Hosting.UnhandledException")]
         public void OnHostingUnhandledException(HttpContext httpContext, Exception exception)
         {
             var message = new HostingExceptionMessage();
@@ -53,7 +53,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Diagnostics.UnhandledException")]
+        [TelemetryName("Microsoft.AspNet.Diagnostics.UnhandledException")]
         public void OnDiagnosticsUnhandledException(HttpContext httpContext, Exception exception)
         {
             var message = new DiagnosticsExceptionMessage();
@@ -62,7 +62,7 @@ namespace Glimpse.Agent.Internal.Inspectors.Mvc
             _broker.SendMessage(message);
         }
 
-        [DiagnosticName("Microsoft.AspNet.Diagnostics.HandledException")]
+        [TelemetryName("Microsoft.AspNet.Diagnostics.HandledException")]
         public void OnDiagnosticsHandledException(HttpContext httpContext, Exception exception)
         {
             var message = new DiagnosticsExceptionMessage();

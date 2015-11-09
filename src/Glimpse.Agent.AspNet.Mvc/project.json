@@ -17,7 +17,6 @@
     "Microsoft.AspNet.Mvc.Razor.Host": "6.0.0-*",
     "Microsoft.AspNet.Razor": "4.0.0-*",
     "Microsoft.AspNet.Routing": "1.0.0-*",
-    "Microsoft.Extensions.DiagnosticAdapter": "1.0.0-*",
     "System.Diagnostics.Tracing.Telemetry": "4.0.0-beta-*"
   },
 

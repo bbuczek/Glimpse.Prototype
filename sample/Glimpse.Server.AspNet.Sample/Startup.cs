@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.Server.AspNet.Sample
 {

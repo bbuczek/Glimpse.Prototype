@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Configuration
 { 

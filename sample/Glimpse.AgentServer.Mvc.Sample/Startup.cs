@@ -3,12 +3,12 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Glimpse.AgentServer.AspNet.Mvc.Sample.Models;
 using Glimpse.AgentServer.AspNet.Mvc.Sample.Services;
-using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Dnx.Runtime;
+using Microsoft.Framework.Configuration;
+using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
 
 namespace Glimpse.AgentServer.AspNet.Mvc.Sample
 {

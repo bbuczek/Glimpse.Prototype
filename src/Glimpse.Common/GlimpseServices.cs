@@ -3,8 +3,8 @@ using Glimpse.Common;
 using Glimpse.Common.Initialization;
 using Glimpse.Common.Internal.Serialization;
 using Glimpse.Initialization;
-using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Internal;
+using Microsoft.Framework.DependencyInjection;
 using Newtonsoft.Json;
 
 namespace Glimpse

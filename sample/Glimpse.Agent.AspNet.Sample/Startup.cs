@@ -2,8 +2,8 @@
 using Glimpse.Agent;
 using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.Configuration;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.Agent.Sample
 {

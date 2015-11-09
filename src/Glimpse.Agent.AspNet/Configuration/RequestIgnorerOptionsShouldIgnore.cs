@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse.Agent.Configuration
 {

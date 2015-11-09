@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Common;
 using Microsoft.AspNet.Http;
-using Microsoft.Extensions.Primitives;
+using Microsoft.Framework.Primitives;
 
 namespace Glimpse.Agent.AspNet.Internal.Inspectors.AspNet
 {

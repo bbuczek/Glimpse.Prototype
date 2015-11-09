@@ -16,8 +16,8 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0-beta7")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .Annotation("ProductVersion", "7.0.0-beta7")
+                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
                 {
@@ -27,17 +27,17 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .HasAnnotation("Relational:Name", "RoleNameIndex");
+                    b.Index("NormalizedName")
+                        .Annotation("Relational:Name", "RoleNameIndex");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetRoles");
+                    b.Annotation("Relational:TableName", "AspNetRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
@@ -53,7 +53,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetRoleClaims");
+                    b.Annotation("Relational:TableName", "AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
@@ -69,7 +69,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserClaims");
+                    b.Annotation("Relational:TableName", "AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
@@ -84,7 +84,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserLogins");
+                    b.Annotation("Relational:TableName", "AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
@@ -95,7 +95,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
+                    b.Annotation("Relational:TableName", "AspNetUserRoles");
                 });
 
             modelBuilder.Entity("Glimpse.AgentServer.AspNet.Mvc.Sample.Models.ApplicationUser", b =>
@@ -108,7 +108,7 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -117,10 +117,10 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.Property<string>("PasswordHash");
 
@@ -133,49 +133,49 @@ namespace Glimpse.AgentServer.AspNet.Mvc.Sample.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .Annotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasAnnotation("Relational:Name", "EmailIndex");
+                    b.Index("NormalizedEmail")
+                        .Annotation("Relational:Name", "EmailIndex");
 
-                    b.HasIndex("NormalizedUserName")
-                        .HasAnnotation("Relational:Name", "UserNameIndex");
+                    b.Index("NormalizedUserName")
+                        .Annotation("Relational:Name", "UserNameIndex");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUsers");
+                    b.Annotation("Relational:TableName", "AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .ForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("Glimpse.AgentServer.AspNet.Mvc.Sample.Models.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("Glimpse.AgentServer.AspNet.Mvc.Sample.Models.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
                         .WithMany()
-                        .HasForeignKey("RoleId");
+                        .ForeignKey("RoleId");
 
                     b.HasOne("Glimpse.AgentServer.AspNet.Mvc.Sample.Models.ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .ForeignKey("UserId");
                 });
         }
     }

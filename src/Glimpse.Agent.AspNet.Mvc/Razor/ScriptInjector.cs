@@ -1,7 +1,7 @@
 using System;
 using Glimpse.Common;
 using Glimpse.Initialization;
-using Microsoft.AspNet.Razor.TagHelpers;
+using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
 namespace Glimpse.Agent.Razor
 {
@@ -21,7 +21,7 @@ namespace Glimpse.Agent.Razor
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.PostContent.SetHtmlContent(
+            output.PostContent.SetContentEncoded(
                 $@"<script src=""{_resourceOptions.HudScriptTemplate}"" id=""__glimpse_hud"" data-request-id=""{_requestId.ToString("N")}"" data-client-template=""{_resourceOptions.ClientScriptTemplate}"" data-context-template=""{_resourceOptions.ContextTemplate}"" data-metadata-template=""{_resourceOptions.MetadataTemplate}"" async></script>
                    <script src=""{_resourceOptions.BrowserAgentScriptTemplate}"" id=""__glimpse_browser_agent"" data-request-id=""{_requestId.ToString("N")}"" data-message-ingress-template=""{_resourceOptions.MessageIngressTemplate}"" async></script>");
         }

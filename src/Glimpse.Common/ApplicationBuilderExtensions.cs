@@ -1,7 +1,7 @@
 ﻿using Glimpse.Common.Initialization;
 using Glimpse.Initialization;
 using Microsoft.AspNet.Builder;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse
 {

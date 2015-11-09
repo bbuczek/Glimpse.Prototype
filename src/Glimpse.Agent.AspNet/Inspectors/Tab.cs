@@ -2,7 +2,7 @@
 using Glimpse.Agent.AspNet.Messages;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Http.Internal;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Framework.DependencyInjection;
 
 namespace Glimpse.Agent.Inspectors
 {

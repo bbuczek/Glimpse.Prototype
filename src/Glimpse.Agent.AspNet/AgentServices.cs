@@ -1,16 +1,16 @@
 using System.IO;
 using Glimpse.Common.Initialization;
-using Microsoft.Extensions.DependencyInjection;
 using Glimpse.Agent;
 using Glimpse.Agent.Internal.Messaging;
 using Glimpse.Agent.Configuration;
 using Glimpse.Agent.Inspectors;
 using Glimpse.Agent.Internal.Inspectors.Mvc;
 using Glimpse.Initialization;
-using Microsoft.Extensions.OptionsModel;
 using System.Linq;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Framework.Configuration;
+using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.DependencyInjection.Extensions;
+using Microsoft.Framework.OptionsModel;
 
 namespace Glimpse
 {

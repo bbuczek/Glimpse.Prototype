@@ -1,10 +1,10 @@
-﻿{
+{
   "webroot": "wwwroot",
   "userSecretsId": "aspnet5-Glimpse.AgentServer.AspNet.Mvc.Sample-13d51bc5-beea-48f5-a33d-0b583120c537",
   "version": "1.0.0-*",
   "dependencies": {
     "EntityFramework.Commands": "7.0.0-*",
-    "EntityFramework.MicrosoftSqlServer": "7.0.0-*",
+    "EntityFramework.SqlServer": "7.0.0-*",
     "Glimpse.Agent.AspNet": "",
     "Glimpse.Agent.AspNet.Mvc": "",
     "Glimpse.Server": "",
@@ -23,12 +23,9 @@
     "Microsoft.AspNet.Server.WebListener": "1.0.0-*",
     "Microsoft.AspNet.StaticFiles": "1.0.0-*",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-*",
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-*",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-*",
-    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-*",
-    "Microsoft.Extensions.Logging": "1.0.0-*",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-*",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-*"
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta8",
+    "Microsoft.Framework.Logging.Debug": "1.0.0-beta8"
   },
   "commands": {
     "web": "Microsoft.AspNet.Server.WebListener",
