@@ -37,6 +37,7 @@ namespace Glimpse.Internal
             _chainContext.Value = next;
         }
 
+        /*
         public OperationTiming<T> PopOperation<T>()
         {
             var current = _chainContext.Value;
@@ -44,6 +45,24 @@ namespace Glimpse.Internal
 
             return new OperationTiming<T>(current?.Operation ?? default(Operation));
         }
+        */
+
+        public OperationTiming<T> PopOperation<T>()
+        {
+            var current = _chainContext.Value;
+
+            var type = current?.Operation?.Item?.GetType();
+            if (type == null || type != typeof (T))
+            {
+                return null;
+            }
+
+            _chainContext.Value = current?.Next;
+
+            return new OperationTiming<T>(current.Operation);
+        }
+
+
 
         private class OperationChain
         {
