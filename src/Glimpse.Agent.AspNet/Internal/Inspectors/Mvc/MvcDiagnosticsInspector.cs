@@ -6,6 +6,7 @@ using Glimpse.Agent.Messages;
 using Glimpse.Internal;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
+using Microsoft.Extensions.Logging;
 
 namespace Glimpse.Agent.Internal.Inspectors
 {
@@ -27,6 +28,8 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNet.Mvc.BeforeAction")]
         public void OnBeforeAction(object actionDescriptor, HttpContext httpContext, IRouteData routeData)
         {
+            _logger.LogWarning("GLIMPSE: OnBeforeAction: Start - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
+
             var startDateTime = DateTime.UtcNow;
             var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
 
@@ -55,11 +58,15 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             _broker.BeginLogicalOperation(message, startDateTime);
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnBeforeAction: End - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
         }
 
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterAction")]
         public void OnAfterAction(object actionDescriptor, HttpContext httpContext)
         {
+            _logger.LogWarning("GLIMPSE: OnAfterAction: Start - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
+
             var timing = _broker.EndLogicalOperation<BeforeActionMessage>();
             var typedActionDescriptor = ConvertActionDescriptor(actionDescriptor);
 
@@ -74,6 +81,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             };
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnAfterAction: End - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
         }
 
         // NOTE: This event is the start of the action execution. The action has been selected, the route
@@ -83,6 +92,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             IActionContext actionContext,
             IDictionary<string, object> arguments)
         {
+            _logger.LogWarning("GLIMPSE: OnBeforeActionMethod: Start - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
+
             var startDateTime = DateTime.UtcNow;
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
@@ -100,12 +111,16 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             _broker.BeginLogicalOperation(message, startDateTime);
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnBeforeActionMethod: End - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
         }
 
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterActionMethod")]
         public void OnAfterActionMethod(
             IActionContext actionContext)
         {
+            _logger.LogWarning("GLIMPSE: OnAfterActionMethod: Start - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
+
             var timing = _broker.EndLogicalOperation<BeforeActionInvokedMessage>();
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
@@ -120,6 +135,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             };
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnAfterActionMethod: End - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
         }
 
         // NOTE: This event is the start of the result pipeline. The action has been executed, but
@@ -129,6 +146,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             IActionContext actionContext,
             object result)
         {
+            _logger.LogWarning("GLIMPSE: OnBeforeActionResult: Start - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
+
             var startDateTime = DateTime.UtcNow;
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
@@ -206,6 +225,8 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             _broker.BeginLogicalOperation(message, startDateTime);
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnBeforeActionResult: End - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
         }
 
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterActionResult")]
@@ -213,6 +234,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             IActionContext actionContext,
             IActionResult result)
         {
+            _logger.LogWarning("GLIMPSE: OnAfterActionResult: Start - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
+
             var timing = _broker.EndLogicalOperation<BeforeActionResultMessage>();
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
@@ -227,6 +250,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             };
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnAfterActionResult: End - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
         }
 
         // NOTE: This event is only fired when we dont find any matches at all. This executes
@@ -239,6 +264,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             string viewName,
             IReadOnlyList<string> searchedLocations)
         {
+            _logger.LogWarning("GLIMPSE: OnViewResultViewNotFound: Start - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
+
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new ActionViewNotFoundMessage()
@@ -253,6 +280,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             };
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnViewResultViewNotFound: End - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
         }
 
         // NOTE: This event is only fired when we do find a match. This executes at the end of
@@ -265,6 +294,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             string viewName,
             IView view)
         {
+            _logger.LogWarning("GLIMPSE: OnViewResultViewFound: Start - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
+
             var actionDescriptor = ConvertActionDescriptor(actionContext.ActionDescriptor);
 
             var message = new ActionViewDidFoundMessage
@@ -279,11 +310,15 @@ namespace Glimpse.Agent.Internal.Inspectors
             };
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnViewResultViewFound: End - {url}", actionContext.HttpContext.Request.Path + actionContext.HttpContext.Request.QueryString);
         }
 
         [DiagnosticName("Microsoft.AspNet.Mvc.BeforeView")]
         public void OnBeforeView(IView view, IViewContext viewContext)
         {
+            _logger.LogWarning("GLIMPSE: OnBeforeView: Start - {url}", viewContext.HttpContext.Request.Path + viewContext.HttpContext.Request.QueryString);
+
             var startDateTime = DateTime.UtcNow;
             var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
             
@@ -302,11 +337,15 @@ namespace Glimpse.Agent.Internal.Inspectors
 
             _broker.BeginLogicalOperation(message, startDateTime);
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnBeforeView: End - {url}", viewContext.HttpContext.Request.Path + viewContext.HttpContext.Request.QueryString);
         }
 
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterView")]
         public void OnAfterView(IView view, IViewContext viewContext)
         {
+            _logger.LogWarning("GLIMPSE: OnAfterView: Start - {url}", viewContext.HttpContext.Request.Path + viewContext.HttpContext.Request.QueryString);
+
             var timing = _broker.EndLogicalOperation<BeforeActionViewInvokedMessage>();
             var actionDescriptor = ConvertActionDescriptor(viewContext.ActionDescriptor);
 
@@ -321,11 +360,15 @@ namespace Glimpse.Agent.Internal.Inspectors
             };
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnAfterView: End - {url}", viewContext.HttpContext.Request.Path + viewContext.HttpContext.Request.QueryString);
         }
         
         [DiagnosticName("Microsoft.AspNet.Mvc.BeforeViewComponent")]
         public void OnBeforeViewComponent(IViewComponentContext viewComponentContext)
         {
+            _logger.LogWarning("GLIMPSE: OnBeforeViewComponent: Start");
+
             var startDateTime = DateTime.UtcNow;
 
             var message = new BeforeViewComponentMessage
@@ -339,11 +382,15 @@ namespace Glimpse.Agent.Internal.Inspectors
             
             _broker.BeginLogicalOperation(message, startDateTime);
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnBeforeViewComponent: End");
         }
 
         [DiagnosticName("Microsoft.AspNet.Mvc.AfterViewComponent")]
         public void OnAfterViewComponent(IViewComponentContext viewComponentContext)
         {
+            _logger.LogWarning("GLIMPSE: OnAfterViewComponent: Start");
+
             var timing = _broker.EndLogicalOperation<BeforeViewComponentMessage>();
 
             var message = new AfterViewComponentMessage
@@ -356,6 +403,8 @@ namespace Glimpse.Agent.Internal.Inspectors
             };
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnAfterViewComponent: End");
         }
 
         private IActionDescriptor ConvertActionDescriptor(object actionDescriptor)

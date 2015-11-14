@@ -3,6 +3,7 @@ using System.Linq;
 using Glimpse.Agent.Messages;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.DiagnosticAdapter;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
 namespace Glimpse.Agent.Internal.Inspectors
@@ -12,6 +13,8 @@ namespace Glimpse.Agent.Internal.Inspectors
         [DiagnosticName("Microsoft.AspNet.Hosting.BeginRequest")]
         public void OnBeginRequest(HttpContext httpContext)
         {
+            _logger.LogWarning("GLIMPSE: OnBeginRequest: Start - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
+
             // TODO: Not sure if this is where this should live but it's the earlist hook point we have
             _contextData.Value = new MessageContext { Id = Guid.NewGuid(), Type = "Request" };
 
@@ -38,17 +41,23 @@ namespace Glimpse.Agent.Internal.Inspectors
             _broker.StartOffsetOperation();
             _broker.BeginLogicalOperation(message, requestDateTime);
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnBeginRequest: End - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
         }
 
         [DiagnosticName("Microsoft.AspNet.Hosting.EndRequest")]
         public void OnEndRequest(HttpContext httpContext)
         {
+            _logger.LogWarning("GLIMPSE: OnEndRequest: Start - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
+
             var message = new EndRequestMessage();
             ProcessEndRequest(message, httpContext);
 
             _broker.SendMessage(message);
+
+            _logger.LogWarning("GLIMPSE: OnEndRequest: End - {url}", httpContext.Request.Path + httpContext.Request.QueryString);
         }
-        
+
         [DiagnosticName("Microsoft.AspNet.Hosting.UnhandledException")]
         public void OnHostingUnhandledException(HttpContext httpContext, Exception exception)
         {
